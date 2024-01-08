@@ -5,11 +5,11 @@
 
 #include <iostream>
 __global__ void check_array_kernal() {
-  int a[32 * 32];
+  int a[32 * 10];
   int tx = threadIdx.x;
   int ty = threadIdx.y;
 
-  tools::NdarrayWarp<int, 32, 32> array_warp(a);
+  tools::NdarrayWarp<int, 32, 10> array_warp(a);
 
   array_warp(ty, tx) = tx + ty;
 
@@ -18,7 +18,7 @@ __global__ void check_array_kernal() {
 
 int main() {
   dim3 grid_dim(1, 1);
-  dim3 block_dim(32, 32);
+  dim3 block_dim(10, 32);
 
   check_array_kernal<<<grid_dim, block_dim>>>();
   cudaDeviceSynchronize();

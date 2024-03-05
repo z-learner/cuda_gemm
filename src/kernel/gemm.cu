@@ -77,7 +77,7 @@ void luanch_gmm(float* input_a, float* input_b, float* output, int N, int M, int
   dim3 grid_dim((N + TILE_SIZE - 1) / TILE_SIZE, (P + TILE_SIZE - 1) / TILE_SIZE);
   dim3 block_dim(TILE_SIZE, TILE_SIZE);
 
-  cuda_kernel::gemm<float><<<grid_dim, block_dim>>>(input_a, input_b, output, N, M, P);
+  cuda_kernel::gemm<<<grid_dim, block_dim>>>(input_a, input_b, output, N, M, P);
 
   return;
 }

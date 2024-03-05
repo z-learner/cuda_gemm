@@ -7,7 +7,5 @@
 #include <cstdint>
 
 
-enum class GmmAlog { kNormal, kShared, kSharedOpt };
 
-
-void luanch_gmm(float* input_a, float* input_b, float* output, int N, int M, int P, GmmAlog gmm_algo = GmmAlog::kNormal);
+void luanch_gmm(float* input_a, float* input_b, float* output, int N, int M, int P);

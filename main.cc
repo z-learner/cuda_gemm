@@ -28,25 +28,10 @@ int main(int argc, char** argv) {
     exit(0);
   }
 
-  int         M    = result["MD"].as<int>();
-  int         N    = result["ND"].as<int>();
-  int         P    = result["PD"].as<int>();
-  std::string type = result["type"].as<std::string>();
+  int M = result["MD"].as<int>();
+  int N = result["ND"].as<int>();
+  int P = result["PD"].as<int>();
 
-  GmmAlog algo_type = GmmAlog::kNormal;
-  if (type == "normal") {
-    std::cout << "use normal algo kernel" << std::endl;
-    algo_type = GmmAlog::kNormal;
-  } else if (type == "shared") {
-    std::cout << "use shared algo kernel" << std::endl;
-    algo_type = GmmAlog::kShared;
-  } else if (type == "shared_opt") {
-    std::cout << "use shared_opt algo kernel" << std::endl;
-    algo_type = GmmAlog::kSharedOpt;
-  } else {
-    std::cout << "unsupport type : " << type << std::endl;
-    return 0;
-  }
 
   int iter = result["iter"].as<int>();
 
@@ -84,7 +69,7 @@ int main(int argc, char** argv) {
 
   for (int index = 0; index < iter; ++index) {
     auto start = std::chrono::system_clock::now();
-    luanch_gmm(dev_input_a, dev_input_b, dev_output, N, M, P, algo_type);
+    luanch_gmm(dev_input_a, dev_input_b, dev_output, N, M, P);
     CUDA_CHECK_LAST_ERROR;
     CUDA_CHECK(cudaDeviceSynchronize());
     auto end = std::chrono::system_clock::now();
